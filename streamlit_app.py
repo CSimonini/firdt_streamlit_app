@@ -45,12 +45,14 @@ streamlit.dataframe(fruityvice_normalized)
 
 import snowflake.connector
 
+# We connected with Snowflake and add the relative information about the user, the warehouse, database.schema, so now we can query some data
+
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("select * from fruit_load_list")
-my_data_row = my_cur.fetchone()
+my_data_row = my_cur.fetchall()
 streamlit.text("The fruit load list:")
-streamlit.text(my_data_row)
+streamlit.text(my_data_rows)
 
 
 
