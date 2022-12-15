@@ -1,4 +1,8 @@
 import streamlit
+import pandas
+import requests
+import snowflake.connector
+from urllib.error import URLError
 
 streamlit.title('My Parents New Healty Diner')
 
@@ -56,11 +60,6 @@ try:
     streamlit.error()
 
 # -------------------------------------------------------------------------------------------
-
-import pandas
-import requests
-import snowflake.connector
-from urllib.error import URLError
 
 # We connected with Snowflake and add the relative information about the user, the warehouse, database.schema, so now we can query some data
 
