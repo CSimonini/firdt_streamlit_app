@@ -22,6 +22,8 @@ fruits_to_show = my_fruit_list.loc[fruit_selected]
 # Display the table on the page.
 streamlit.dataframe(fruits_to_show)
 
+-----------------------------------------------------------------------------------------------
+
 # NEW SECTION
 
 streamlit.header("Fruityvice Fruit Advice!")
@@ -38,3 +40,12 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
 # output it the screen as a table
 streamlit.dataframe(fruityvice_normalized)
+
+-------------------------------------------------------------------------------------------
+
+import snowflake.connector
+
+
+
+
+
