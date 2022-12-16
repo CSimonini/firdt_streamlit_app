@@ -45,28 +45,9 @@ try:
         streamlit.dataframe(back_from_function)
         
 except URLError as e:
-    streamlit.error()
+    streamlit.stop()
 
 # -------------------------------------------------------------------------------------------
-
-# We connected with Snowflake and add the relative information about the user, the warehouse, database.schema, so now we can query some data
-
-streamlit.header("The fruit load list contains:")
-# Snowflake-related functions
-def get_fruit_load_list():
-    with my_cnx.cursor() as my_cur:
-        my_cur.execute("select * from fruit_load_list")
-        return my_cur.fetchall()
-    
-# Add a button to load the fruit
-if streamlit.button('Get Fruit List'):
-    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-    my_data_rows = get_fruit_load_list()
-    my_cnx.close()
-    streamlit.dataframe(my_data_rows)
-   
-
-# ----------------------------------------------------------------------------------
 
 # Allow the end user to add a fruit to the list
 def insert_row_snowflake(new_fruit):
@@ -79,3 +60,21 @@ def insert_row_snowflake(new_fruit):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     back_from_function = insert_row_snowflake(add_my_fruit)
     streamlit.text(back_from_function)
+streamlit.header("The fruit load list contains:")
+# Snowflake-related functions
+def get_fruit_load_list():
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("select * from fruit_load_list")
+        return my_cur.fetchall()
+    
+#Add a button to load the fruit
+if streamlit.button('Get Fruit List'):
+   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+   my_data_rows = get_fruit_load_list()
+   my_cnx.close()
+   streamlit.dataframe(my_data_rows)
+   
+#streamlit.write('Thanks for adding ', add_my_fruit)
+   
+
+
